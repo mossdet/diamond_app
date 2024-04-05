@@ -1,0 +1,21 @@
+#Start docker image with python as entrypoint(default)
+docker run -it --rm python:3.11.8-slim
+
+#Start docker image with bash as entrypoint
+docker run -it --rm --entrypoint=bash python:3.11.8-slim
+
+
+docker run -it --rm -p 9696:9696 python:3.11.8-slim
+
+docker run -it --rm -p 9696:9696 ws_test
+
+
+
+#Run diamond cut predictor WebApp locally using a Docker image
+dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$ docker build -t ws_test .
+dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$ docker run -it --rm -p 9696:9696 ws_test
+
+
+# Run the test script for the diamond cut predictor WebApp
+(flask-web-service-py3.11) dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$
+ python predict_diamond_cut_test.py

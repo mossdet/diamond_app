@@ -1,0 +1,16 @@
+<mxfile host="app.diagrams.net" modified="2024-04-04T16:52:55.185Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0" etag="TgTj7_FPsg4_stkWpNlj" version="21.7.5" type="device">
+  <diagram name="Page-1" id="cJZb0E2UauBPatAsgssz">
+    <mxGraphModel dx="1434" dy="746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QBppMuox8Vm9wZlYPuwv-1" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;&lt;u&gt;&lt;font style=&quot;font-size: 17px;&quot;&gt;Web Service App&lt;/font&gt;&lt;/u&gt;&lt;/b&gt;&lt;br&gt;&amp;nbsp;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;&lt;ul&gt;&lt;li&gt;Flask App&lt;/li&gt;&lt;li&gt;access with gunicorn&lt;/li&gt;&lt;li&gt;Predict diamond cut using stored classifiers&lt;br&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="41" y="39" width="279" height="279" as="geometry" />
+        </mxCell>
+        <mxCell id="QBppMuox8Vm9wZlYPuwv-3" value="&lt;div align=&quot;justify&quot;&gt;&lt;b&gt;&lt;u&gt;&lt;font style=&quot;font-size: 17px;&quot;&gt;Docker Image&lt;/font&gt;&lt;/u&gt;&lt;/b&gt;&lt;br&gt;&amp;nbsp;&lt;br&gt;Container with:&lt;br&gt;&lt;ul&gt;&lt;li&gt;&amp;nbsp;ml-framework library&lt;/li&gt;&lt;li&gt;Web Service App&lt;/li&gt;&lt;/ul&gt;Build Docker Image&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;Run Docker Container:&lt;/div&gt;&lt;div align=&quot;justify&quot;&gt;docker run -it --rm -p 9696:9696 ws_test&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="400" y="39" width="280" height="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

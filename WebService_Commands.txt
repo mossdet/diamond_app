@@ -1,0 +1,12 @@
+Run Flask App
+go to poetry environment
+run the predict_diamond_cut.py script
+Flask is a test App, a production App has must be run with GUNICORN which is a Python WSGI HTTP Server for UNIX
+An alternative to GUNICORN is waitress, which runs on Windows
+
+
+To Run the Webservcie with gunicorn:
+gunicorn --bind 172.30.176.211:9696 --timeout 600 predict_diamond_cut:app
+
+
+waitress-serve --listen=172.30.176.211:9696 predict_diamond_cut:app

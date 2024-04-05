@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "flask-web-service"
+version = "0.1.0"
+description = ""
+authors = ["mossdet <mossdet.detector@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+flask = "^3.0.2"
+ipython = "^8.23.0"
+gunicorn = "21.0.1"
+ml-framework = {path = "ml_framework-0.1.0-py3-none-any.whl"}
+jupyter = "^1.0.0"
+lab = "^8.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

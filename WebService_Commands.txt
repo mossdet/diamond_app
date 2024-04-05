@@ -1,12 +1,57 @@
+##########
+Create Poetry environment
+poetry env use /usr/bin/python3.11
+
+##########
+Install all dependencies specified in teh toml file to teh environment
+poetry install
+
+
+##########
+Explanation of teh WebService:
 Run Flask App
 go to poetry environment
 run the predict_diamond_cut.py script
 Flask is a test App, a production App has must be run with GUNICORN which is a Python WSGI HTTP Server for UNIX
 An alternative to GUNICORN is waitress, which runs on Windows
 
-
 To Run the Webservcie with gunicorn:
 gunicorn --bind 172.30.176.211:9696 --timeout 600 predict_diamond_cut:app
 
-
+To Run the Webservcie with waitress:
 waitress-serve --listen=172.30.176.211:9696 predict_diamond_cut:app
+
+
+
+
+##########
+Write docker file that defines the docker image that will be built
+
+##########
+Build docker image using the saved Docker File
+dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$ docker build -t ws_test .
+
+##########
+Run the docker image. Specifiy first the container port that will is exposed and will be paired with the host port (9696:9696)
+dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$ docker run -it --rm -p 9696:9696 ws_test
+
+##########
+Run the test script for the diamond cut predictor WebApp
+(flask-web-service-py3.11) dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$ python predict_diamond_cut_test.py
+
+
+
+
+##########
+Other Docker commands
+#Start docker image with python as entrypoint(default)
+docker run -it --rm python:3.11.8-slim
+
+#Start docker image with bash as entrypoint
+docker run -it --rm --entrypoint=bash python:3.11.8-slim
+
+
+docker run -it --rm -p 9696:9696 python:3.11.8-slim
+
+docker run -it --rm -p 9696:9696 ws_test
+

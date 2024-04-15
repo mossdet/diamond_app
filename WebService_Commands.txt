@@ -3,12 +3,12 @@ Create Poetry environment
 poetry env use /usr/bin/python3.11
 
 ##########
-Install all dependencies specified in teh toml file to teh environment
+Install all dependencies specified in the toml file to the environment
 poetry install
 
 
 ##########
-Explanation of teh WebService:
+Explanation of the WebService:
 Run Flask App
 go to poetry environment
 run the predict_diamond_cut.py script
@@ -22,24 +22,60 @@ To Run the Webservcie with waitress:
 waitress-serve --listen=172.30.176.211:9696 predict_diamond_cut:app
 
 
+#########
+Create Docker container
+
+# Write the docker file that defines the docker image that will be built. To perform these steps, the .lock fil must be available and up to date.
+
+# Build docker image using the saved Docker File. The name of the doker image will be diamond_cut_service and the tag will be v001. If the tag is not specified it will default to the tag "latest"
+dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/diamond_app$ docker build -t diamond_cut_service:v001 .
+
+# Run the docker image. Specifiy first the container port that will is exposed and will be paired with the host port (9696:9696)
+dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/diamond_app$ docker run -it --rm -p 9696:9696 diamond_cut_service:v001
+
+# Run the test script for the diamond cut predictor WebApp
+(flask-web-service-py3.11) dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/diamond_app$ python predict_diamond_cut_test.py
 
 
-##########
-Write docker file that defines the docker image that will be built
 
-##########
-Build docker image using the saved Docker File
-dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$ docker build -t ws_test .
+#########
+Setup Kubernetes
+Kind and Kubectl will be used. Kind allows setting a local kubernetes cluster and Kubectl allows interacting with any Kubernetes cluster.
 
-##########
-Run the docker image. Specifiy first the container port that will is exposed and will be paired with the host port (9696:9696)
-dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$ docker run -it --rm -p 9696:9696 ws_test
+1. Install kubectl(if using a windows machine, kubectl gets installed together with the docker desktop app).
+2. Install kind:
+	2.1 Download kind to bin folder so that it can be executed from anywhere in the OS
+		- sudo wget -P /bin https://kind.sigs.k8s.io/dl/v0.22.0/kind-linux-amd64 -O kind
+	2.2 
+	- sudo chmod +x kind
 
-##########
-Run the test script for the diamond cut predictor WebApp
-(flask-web-service-py3.11) dlp@LAPTOP-TFQFNF6U:/mnt/f/Weiterbildung/UOC_ML_Bootcamp/Capstone_Projects/flask_web_service$ python predict_diamond_cut_test.py
+3. Create local kubernetes cluster: kind create cluster
+	- The created cluster can be started with the command: kubectl cluster-info --context kind-kind
+	- To check that the cluster is working we can run the following commands:
+		kubectl get service
+		kubectl get pod
+		kubectl get deployment
+	
+	- define the .yaml file (deployment.yaml)
+	- apply the deployment file to the created cluster: kubectl apply -f deployment.yaml
+	- If we now run kubectl get deployment, we should see the cluster and the description of its status, which will show an error
+	- To further anbalyze the error we can also run kubectl describe pod | less
+	- The error is caused by a failure to pull the image diamond_cut_service:v001, this is due to the fact that we haven't loaded any docker image to the cluster (see https://kind.sigs.k8s.io/docs/user/quick-start/#loading-an-image-into-your-cluster)
+	- We must now load the docker image to the cluster: kind load docker-image diamond_cut_service:v001	
+	- run kubectl get pod again to check if the pods from the cluster are running
+	
+	- Now the deployment can be tested by using port forwarding via kubectl:
+		kubectl port-forward diamond-deployment-68bc6587cb-259nn 9696:9696
+	and running the test script: predict_diamond_cut_test.py
 
-
+4. Create service by defining service.yaml and applying it to the cluster: 
+	kubectl apply -f service.yaml
+	kubectl get service
+	
+	Test service (to test the service we map port 8080 of local computer to port 80 of service):
+	kubectl port-forward service/diamond-deployment 8080:80
+	
+	
 
 
 ##########

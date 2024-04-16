@@ -5,7 +5,7 @@ metadata:
   name: diamond
 spec:
   # How many pods to create
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       # all pods with APP="diamond" belong to this deployment
@@ -24,6 +24,6 @@ spec:
           resources:
             limits:
               memory: "2048Mi" #128Mi
-              cpu: "1"
+              cpu: "5"
           ports:
             - containerPort: 9696

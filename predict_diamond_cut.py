@@ -14,6 +14,7 @@ from ml_framework.data_classification.decision_tree_classifier import DecisionTr
 from ml_framework.data_classification.random_forest_classifier import RandomForestClassifier
 from ml_framework.data_classification.support_vector_classifier import SupportVectorClassifier
 from ml_framework.data_classification.xgboost_classifier import XGBoostClassifier
+from ml_framework.data_classification.ann_tf_classifier import ANN_TF_Classifier
 
 # Load the data analyzer for classification of diamnond cut
 analyzer_filepath = "Stored_Models/Classification_Analyzer.bin"
@@ -34,14 +35,6 @@ classifiers_ls = [
     "RandomForestClassifier",
     "XGBoostClassifier",
     "ANN_TF_Classifier",
-    "SupportVectorClassifier",
-]
-classifiers_ls = [
-    "LogisticRegressionClassifier",
-    "KNN_Classifier",
-    "DecisionTreeClassifier",
-    "RandomForestClassifier",
-    "XGBoostClassifier",
     "SupportVectorClassifier",
 ]
 

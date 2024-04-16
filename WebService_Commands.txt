@@ -90,6 +90,16 @@ Test Kubernetes deployment
 	kubectl port-forward service/diamond 8080:80	
 
 	
+#########
+# Stop service and deployment
+kubectl delete -f deployment.yaml
+kubectl delete -f service.yaml
+
+# Restart service and deployment
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+
+kubectl port-forward service/diamond 8080:80
 
 
 ##########
@@ -105,3 +115,5 @@ docker run -it --rm -p 9696:9696 python:3.11.8-slim
 
 docker run -it --rm -p 9696:9696 ws_test
 
+
+correct deployment and service yaml files. The kubernetes cluster created using kindest is successfully running on the local computer. The deployment and service are correctly created for the cluster. The cluster (both the nodes and service) were successfully tested by using port forwarding and the predict_diamond_cut_test.py script  

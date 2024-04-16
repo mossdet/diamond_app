@@ -13,13 +13,11 @@ with open(analyzer_filepath, 'rb') as f_in:
 
 data_to_predict = data_analyzer.test_data
 
-#url = "http://192.168.4.20:9696/predict_diamond_cut"
-#url = "http://172.30.176.211:9696/predict_diamond_cut"
 url = "http://0.0.0.0:9696/predict_diamond_cut"
 url = "http://0.0.0.0:8080/predict_diamond_cut"
 
-#for test_data_idx in range(len(data_analyzer.test_data)):
-for test_data_idx in range(10):
+for test_data_idx in range(len(data_analyzer.test_data)):
+#for test_data_idx in range(10):
     #test_data_idx = random.randint(0, len(data_analyzer.test_data))
     print("Test data entree idx: ", test_data_idx)
 

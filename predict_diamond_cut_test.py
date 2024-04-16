@@ -16,7 +16,7 @@ data_to_predict = data_analyzer.test_data
 #url = "http://192.168.4.20:9696/predict_diamond_cut"
 #url = "http://172.30.176.211:9696/predict_diamond_cut"
 url = "http://0.0.0.0:9696/predict_diamond_cut"
-url = "http://10.96.95.250:80/predict_diamond_cut"
+url = "http://0.0.0.0:8080/predict_diamond_cut"
 
 #for test_data_idx in range(len(data_analyzer.test_data)):
 for test_data_idx in range(10):

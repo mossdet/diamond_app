@@ -1,10 +1,12 @@
 ##########
-Create Poetry environment
+# Create Poetry environment
 poetry env use /usr/bin/python3.11
 
-##########
-Install all dependencies specified in the toml file to the environment
+#Install all dependencies specified in the toml file to the environment
 poetry install
+
+# Build wheel file using poetry
+poetry build
 
 
 ##########
@@ -49,32 +51,44 @@ Kind and Kubectl will be used. Kind allows setting a local kubernetes cluster an
 	2.2 
 	- sudo chmod +x kind
 
-3. Create local kubernetes cluster: kind create cluster
-	- The created cluster can be started with the command: kubectl cluster-info --context kind-kind
+# Create local kubernetes cluster: 
+	kind create cluster
+# The created cluster can be started with the command: 
+	kubectl cluster-info --context kind-kind
 	- To check that the cluster is working we can run the following commands:
 		kubectl get service
 		kubectl get pod
 		kubectl get deployment
 	
-	- define the .yaml file (deployment.yaml)
-	- apply the deployment file to the created cluster: kubectl apply -f deployment.yaml
-	- If we now run kubectl get deployment, we should see the cluster and the description of its status, which will show an error
-	- To further anbalyze the error we can also run kubectl describe pod | less
-	- The error is caused by a failure to pull the image diamond_cut_service:v001, this is due to the fact that we haven't loaded any docker image to the cluster (see https://kind.sigs.k8s.io/docs/user/quick-start/#loading-an-image-into-your-cluster)
-	- We must now load the docker image to the cluster: kind load docker-image diamond_cut_service:v001	
-	- run kubectl get pod again to check if the pods from the cluster are running
+# define the .yaml file (deployment.yaml)
+# apply the deployment file to the created cluster: 
+	kubectl apply -f deployment.yaml
+# If we now run 
+	kubectl get deployment
+we should see the cluster and the description of its status, which will show an error
+
+# To further anbalyze the error we can also run:
+	kubectl describe pod | less
+
+# The error is caused by a failure to pull the image diamond_cut_service:v001, this is due to the fact that we haven't loaded any docker image to the cluster (see https://kind.sigs.k8s.io/docs/user/quick-start/#loading-an-image-into-your-cluster)
+# We must now load the docker image to the cluster: 
+	kind load docker-image diamond_cut_service:v001	
+# Run kubectl get pod again to check if the pods from the cluster are running
 	
-	- Now the deployment can be tested by using port forwarding via kubectl:
-		kubectl port-forward diamond-deployment-68bc6587cb-259nn 9696:9696
+#########
+Test Kubernetes deployment
+#Now the deployment can be tested by using port forwarding via kubectl:
+	kubectl port-forward diamond-68bc6587cb-nhb5v 9696:9696
 	and running the test script: predict_diamond_cut_test.py
 
-4. Create service by defining service.yaml and applying it to the cluster: 
+#########
+#Create service by defining service.yaml and applying it to the cluster: 
 	kubectl apply -f service.yaml
 	kubectl get service
 	
-	Test service (to test the service we map port 8080 of local computer to port 80 of service):
-	kubectl port-forward service/diamond-deployment 8080:80
-	
+#	Test service (to test the service we map port 8080 of local computer to port 80 of service):
+	kubectl port-forward service/diamond 8080:80	
+
 	
 
 

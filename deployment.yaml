@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+# metada configures deployment name
+metadata:
+  name: diamond
+spec:
+  # How many pods to create
+  replicas: 1
+  selector:
+    matchLabels:
+      # all pods with APP="diamond" belong to this deployment
+      app: diamond
+  template:
+    metadata:
+      labels:
+        # each pod gets a label app and the value for this label will be diamond
+        app: diamond
+    # spec configures pod name
+    spec:
+      containers:
+        - name: diamond
+          # docker image to be used by the pod
+          image: diamond_cut_service:v001
+          resources:
+            limits:
+              memory: "2048Mi" #128Mi
+              cpu: "1"
+          ports:
+            - containerPort: 9696

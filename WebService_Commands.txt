@@ -56,9 +56,9 @@ Kind and Kubectl will be used. Kind allows setting a local kubernetes cluster an
 # The created cluster can be started with the command: 
 	kubectl cluster-info --context kind-kind
 	- To check that the cluster is working we can run the following commands:
-		kubectl get service
 		kubectl get pod
 		kubectl get deployment
+		kubectl get service
 	
 # define the .yaml file (deployment.yaml)
 # apply the deployment file to the created cluster: 
